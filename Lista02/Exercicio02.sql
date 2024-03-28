@@ -73,3 +73,14 @@ SELECT * FROM alunos
 SELECT * FROM curso
 SELECT * FROM turmas
 SELECT * FROM alunos_turmas
+
+-- a.
+SELECT alunos.nomealuno, turmas.idturma FROM (turmas NATURAL INNER JOIN alunos_turmas)
+NATURAL INNER JOIN alunos WHERE turmas.idTurma = 3
+
+-- b.
+SELECT curso.nomecurso, turmas.idturma FROM curso RIGHT JOIN TURMAS USING(idcurso)
+WHERE turmas.idturma = 2
+
+-- c.
+

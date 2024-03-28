@@ -263,7 +263,7 @@ SELECT productname, price FROM products
 WHERE idclient = (SELECT idclient FROM clients WHERE firstname = 'Rodrigo' )
 ORDER BY price DESC
 
-SELECT * FROM products
+SELECT * FROM products ORDER BY idclient
 
 --****************************--
 --         Preparação         --
@@ -276,17 +276,44 @@ INSERT INTO products (productname,brand,category,discount,price) VALUES
 ('drone','dji','eletronico',0.12,9856.0)
 
 -- Cross join (lixo)
-
 SELECT * FROM clients, products
 SELECT * FROM products, clients
 SELECT * FROM clients CROSS JOIN products
 
 
--- Inner Join (Relaciona por PK/FK)
+-- Inner Join (Relaciona por PK/FK) - somente mostra o que tem correspondencia entre as tabelas (INTERSEÇÃO).
 
 SELECT firstname,productname FROM clients INNER JOIN products
 ON clients.idclient = products.idclient WHERE firstname = 'Rodrigo' OR firstname = 'rodrigo'
 
 SELECT * FROM clients INNER JOIN products USING (idclient) -- comando de cima simplificado (usando idclient pra juntar)
 
-SELECT * FROM clients NATURAL INNER JOIN products --Puxa PK por ser Natural
+SELECT * FROM clients NATURAL INNER JOIN products --Puxa PK que é FK na outra, por ser Natural
+
+SELECT clients.firstname, products.productname FROM clients INNER JOIN products USING (idclient) -- USING (escolhe qual a relação a mostrar a INTERSEÇÃO ou FULL).
+
+SELECT clients.firstname, products.productname FROM clients LEFT JOIN products USING (idclient) -- Usa como referencia a tabela da esqueda do (JOIN).
+
+SELECT clients.firstname, products.productname FROM clients RIGHT JOIN products USING (idclient) -- Usa como referencia a tabela da direita do (JOIN).
+
+SELECT clients.firstname, products.productname FROM clients FULL JOIN products USING (idclient) -- Todos os itens de todas as tabelas.
+
+-- 1. Quais clientes compraram produtos da categoria eletronicos?
+SELECT clients.firstname, products.productname, products.category
+FROM products NATURAL INNER JOIN clients WHERE products.category = 'eletronicos'
+
+-- 2. Quais clientes não compraram nenhum produto?
+SELECT clients.firstname, products.productname FROM products RIGHT JOIN clients USING(idclient) WHERE products.idclient IS NULL
+
+-- 3.Quais produtos nao foram vendidos?
+SELECT clients.firstname, products.productname FROM products LEFT JOIN clients USING(idclient) WHERE products.idclient IS NULL
+
+-- 4. Quais produtos Rodrigo comprou ?
+SELECT clients.firstname, products.productname FROM products RIGHT JOIN clients USING(idclient) WHERE clients.firstname = 'Rodrigo'
+
+-- 5. Quais clientes compraram produtos da marca DELL?
+SELECT clients.firstname, products.productname, products.brand FROM products LEFT JOIN clients USING(idclient) WHERE products.brand = 'dell'
+
+
+
+

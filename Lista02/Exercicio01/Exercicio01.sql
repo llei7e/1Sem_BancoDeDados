@@ -51,4 +51,20 @@ INSERT INTO Autor VALUES(7,'Miguel de Cervantes');
 INSERT INTO Autor VALUES(8,'J.R.R. Tolkien');
 INSERT INTO Autor VALUES(9,'J.K. Rowling');
 INSERT INTO Autor VALUES(10,'George Orwell');
-INSERT INTO Autor VALUES(11,'Antoine de Saint-Exupéry');
+INSERT INTO Autor VALUES(11,'Antoine de Saint-Exupéry');	
+
+UPDATE autor SET nomeautor = 'Michael Jackson' WHERE idautor = 10
+UPDATE autor SET nomeautor = 'Mary Jane' WHERE idautor = 7
+
+
+-- a.
+SELECT livros.titulo, autor.nomeautor FROM (autor NATURAL INNER JOIN livros_autor)
+NATURAL INNER JOIN livros
+
+-- b.
+SELECT livros.titulo, autor.nomeautor FROM (livros NATURAL INNER JOIN livros_autor)
+NATURAL INNER JOIN autor WHERE autor.nomeautor = 'Jane Austen'
+
+-- c.
+SELECT livros.titulo, autor.nomeautor FROM (livros NATURAL INNER JOIN livros_autor)
+NATURAL INNER JOIN autor WHERE livros.titulo = 'O Pequeno Principe'
