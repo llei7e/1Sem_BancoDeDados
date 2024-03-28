@@ -34,8 +34,18 @@ INSERT INTO funcionarios VALUES (1,1,'Gabriel Barbosa', '20/03/2022', 'Gerente d
 								(10,5,'Wardell Stephen Curry', '12/08/2022', 'Analista Contábil');
 								
 UPDATE funcionarios SET cargo = 'Gerente' WHERE idfunc <=5;
-
+UPDATE funcionarios SET nomefunc = 'Lebron James' WHERE idfunc =10;
 
 								
 select * from funcionarios ORDER BY idfunc
-								
+
+-- a.
+SELECT funcionarios.nomefunc, departamentos.nomedepto, funcionarios.cargo FROM funcionarios NATURAL INNER JOIN departamentos
+WHERE departamentos.nomedepto = 'Desenvolvimento de Software'
+
+-- b.
+SELECT funcionarios.nomefunc, departamentos.nomedepto, funcionarios.cargo FROM funcionarios NATURAL INNER JOIN departamentos
+WHERE funcionarios.nomefunc = 'Wardell Stephen Curry'
+
+-- c.
+

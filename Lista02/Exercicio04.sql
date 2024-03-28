@@ -56,3 +56,17 @@ INSERT INTO paciente_medico VALUES (1,1,5,'10/08/2022'),
 								   (8,10,8,'08/01/2023'),
 								   (9,5,10,'20/01/2023'),
 								   (10,4,4,'21/04/2023');
+								   
+UPDATE paciente_medico SET idMedico = 1 WHERE idmedico = 4;
+UPDATE paciente_medico SET idMedico = 1 WHERE idmedico = 5;
+								   
+-- a.
+SELECT paciente.nomepac, medico.nomemed FROM (paciente NATURAL INNER JOIN paciente_medico)
+NATURAL INNER JOIN medico WHERE medico.nomemed = 'Nicole Kidman'
+
+-- b.
+SELECT paciente.nomepac, medico.nomemed FROM (paciente NATURAL INNER JOIN paciente_medico)
+NATURAL INNER JOIN medico WHERE paciente.nomepac = 'Leonardo DiCaprio'
+
+-- c.
+
