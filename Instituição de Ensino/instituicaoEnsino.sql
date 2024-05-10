@@ -183,12 +183,10 @@ SELECT * FROM matriculas_disciplinas
 
 -- Dado o RA ou o Nome do Aluno, buscar no BD todos os demais dados do aluno.
 SELECT matriculas.status, alunos.cpf,matriculas.ra, alunos.nome, alunos.idade, alunos.pais, alunos.estado, alunos.cidade, alunos.rua,
-alunos.num_casa, email.email, email.dominio, telefone.ddd, telefone.telefone, departamentos.nome_depto, cursos.nome_curso,
-disciplinas.nome_disc 
+alunos.num_casa, email.email, email.dominio, telefone.ddd, telefone.telefone
 FROM alunos NATURAL INNER JOIN matriculas NATURAL INNER JOIN email
-NATURAL INNER JOIN telefone NATURAL INNER JOIN matriculas_disciplinas
-NATURAL INNER JOIN disciplinas NATURAL INNER JOIN cursos NATURAL INNER JOIN departamentos
-WHERE matriculas.ra = 1
+NATURAL INNER JOIN telefone
+WHERE matriculas.ra = 1 OR alunos.nome = 'Ricardo Kaká'
 
 
 
