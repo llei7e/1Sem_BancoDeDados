@@ -2,28 +2,28 @@ CREATE TABLE ALunos(
 	idAluno int primary key,
 	nomeAluno varchar(100),
 	dataNasc date
-)
+);
 
 CREATE TABLE Curso (
 	idCurso int primary key,
 	nomeCurso varchar(50)
-)
+);
 
 CREATE TABLE turmas(
 	idTurma int primary key,
 	idCurso int,
 	CONSTRAINT fk_curso FOREIGN KEY (idCurso) REFERENCES curso (idCurso),
 	prof_responsavel varchar(100)
-)
+);
 
 CREATE TABLE alunos_turmas(
 	idTurma int,
 	CONSTRAINT fk_turma FOREIGN KEY (idTurma) REFERENCES turmas(idTurma),
 	idAluno int,
 	CONSTRAINT fk_aluno FOREIGN KEY (idAluno) REFERENCES alunos (idAluno) 
-)
+);
 
-INSERT INTO alunos VALUES(1,'Charlie Brown','20/10/2000')
+INSERT INTO alunos VALUES(1,'Charlie Brown','20/10/2000');
 INSERT INTO alunos VALUES(2,'Axel Rose','20/10/2000');
 INSERT INTO alunos VALUES(3,'Elvis Presley','20/10/2000');
 INSERT INTO alunos VALUES(4,'John Lennon','20/10/2000');
@@ -83,4 +83,12 @@ SELECT curso.nomecurso, turmas.idturma FROM curso RIGHT JOIN TURMAS USING(idcurs
 WHERE turmas.idturma = 2
 
 -- c.
-
+SELECT turmas.idturma,
+	   COUNT (alunos.nomealuno) AS quantidade_alunos
+FROM
+	alunos
+NATURAL INNER JOIN
+	alunos_turmas
+NATURAL INNER JOIN
+	turmas
+GROUP BY turmas.idturma ORDER BY turmas.idturma

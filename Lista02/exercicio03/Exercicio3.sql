@@ -11,3 +11,11 @@ SELECT funcionarios.nomefunc, projetos.nomeproj FROM (projetos NATURAL INNER JOI
 NATURAL INNER JOIN funcionarios WHERE funcionarios.nomefunc = 'Marco Polo'
 
 -- c.
+SELECT 
+	COUNT (funcionarios.nomefunc)/ COUNT (projetos.idprojetos) AS funcionarios_por_projeto
+FROM 
+	funcionarios
+NATURAL INNER JOIN
+	funcionarios_projetos
+NATURAL INNER JOIN
+	projetos

@@ -35,6 +35,8 @@ INSERT INTO funcionarios VALUES (1,1,'Gabriel Barbosa', '20/03/2022', 'Gerente d
 								
 UPDATE funcionarios SET cargo = 'Gerente' WHERE idfunc <=5;
 UPDATE funcionarios SET nomefunc = 'Lebron James' WHERE idfunc =10;
+INSERT INTO funcionarios VALUES (11,1,'Marcos', '20/03/2022', 'Desenvolvedor Junior'),
+								(12,1,'Joao', '20/03/2022', 'Desenvolvedor Pleno');
 
 								
 select * from funcionarios ORDER BY idfunc
@@ -48,4 +50,14 @@ SELECT funcionarios.nomefunc, departamentos.nomedepto, funcionarios.cargo FROM f
 WHERE funcionarios.nomefunc = 'Wardell Stephen Curry'
 
 -- c.
-
+SELECT 
+    ger.nomeFunc AS gerente,
+    COUNT(func.idFunc) AS total_funcionarios
+FROM 
+    funcionarios ger
+LEFT JOIN 
+    funcionarios func ON ger.id_Depto = func.id_Depto AND func.cargo != 'Gerente'
+WHERE 
+    ger.cargo = 'Gerente'
+GROUP BY 
+    ger.nomeFunc;

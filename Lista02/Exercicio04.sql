@@ -69,4 +69,12 @@ SELECT paciente.nomepac, medico.nomemed FROM (paciente NATURAL INNER JOIN pacien
 NATURAL INNER JOIN medico WHERE paciente.nomepac = 'Leonardo DiCaprio'
 
 -- c.
+SELECT 
+	COUNT (paciente.nomepac) / COUNT (medico.nomemed) AS paciente_por_medico
+FROM
+	paciente
+NATURAL INNER JOIN
+	paciente_medico
+NATURAL INNER JOIN 
+	medico
 
